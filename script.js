@@ -20,12 +20,12 @@ fetch('data.json')
             outputDiv.innerHTML = '';
             jsonData.forEach(item => {
                 const itemDiv = document.createElement('div');
-                itemDiv.classList.add('item');
+                itemDiv.classList.add('item'+item.title.replace(/\s+/g, '-'));
 
                 const previousLabel = getPreviousLabel(timeframe); // Obtiene la etiqueta correcta
 
                 itemDiv.innerHTML = `
-                    <h1>${item.title}</h1>
+                    <div class="squareT"><h1>${item.title}</h1> <img src="images/icon-ellipsis.svg" alt="ellipsis" id="ellipsis"></div>
                     <p class="current">${item.timeframes[timeframe].current}hrs</p> <p class="current">${previousLabel}${item.timeframes[timeframe].previous}hrs</p>
                 `;
                 outputDiv.appendChild(itemDiv);
