@@ -19,16 +19,21 @@ fetch('data.json')
         function displayData(timeframe) {
             outputDiv.innerHTML = '';
             jsonData.forEach(item => {
+                const bgDiv = document.createElement('div');
+                bgDiv.classList.add('bg'+item.title.replace(/\s+/g, '-'));
+        
                 const itemDiv = document.createElement('div');
-                itemDiv.classList.add('item'+item.title.replace(/\s+/g, '-'));
-
-                const previousLabel = getPreviousLabel(timeframe); // Obtiene la etiqueta correcta
-
+                itemDiv.classList.add('item');
+        
+                const previousLabel = getPreviousLabel(timeframe);
+        
                 itemDiv.innerHTML = `
-                    <div class="squareT"><h1>${item.title}</h1> <img src="images/icon-ellipsis.svg" alt="ellipsis" id="ellipsis"></div>
-                    <p class="current">${item.timeframes[timeframe].current}hrs</p> <p class="current">${previousLabel}${item.timeframes[timeframe].previous}hrs</p>
+                    <div class="squareT"><h1>${item.title}</h1> <div id="dots"> <img src="images/icon-ellipsis.svg" alt="ellipsis" id="ellipsis"></div></div>
+                    <div class="text"><p class="current">${item.timeframes[timeframe].current}hrs</p> <p class="previous">${previousLabel}${item.timeframes[timeframe].previous}hrs</p></div>
                 `;
-                outputDiv.appendChild(itemDiv);
+        
+                bgDiv.appendChild(itemDiv); // Anida itemDiv dentro de bgDiv
+                outputDiv.appendChild(bgDiv); // Agrega bgDiv al outputDiv
             });
         }
 
@@ -53,4 +58,4 @@ fetch('data.json')
             });
         });
     })
-    .catch(error => console.error("Error al cargar el JSON:", error));
+    .catch(error => console.error("Oops! Something went wrong.", error));
