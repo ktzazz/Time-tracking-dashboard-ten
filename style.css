@@ -414,7 +414,8 @@ h1{
 @media (min-width: 1200px){
 
     body{
-        padding-block-start: 10rem;
+        padding-block-start: 0rem;
+        justify-content: center;
     }    
 
     .main{
